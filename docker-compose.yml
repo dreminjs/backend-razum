@@ -1,0 +1,21 @@
+version: '3.9'
+services:
+  database:
+    image: postgres
+    environment:
+      POSTGRES_USER: sofia
+      POSTGRES_PASSWORD: sofia
+      POSTGRES_DB: sofia_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  nodejs:
+    image: node:20
+    working_dir: /app
+    volumes:
+      - ./app:/app
+
+volumes:
+  postgres_data:
