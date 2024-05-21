@@ -13,18 +13,10 @@ export class AuthController {
   @Post('/signup')
   async signup(
     @Body() body: SignupDto,
-    @Res({ passthrough: true }) res,
   ): Promise<User> {
-
-    this.logger.log(body)
-
-    this.logger.log("HIT 2")
 
     const user = await this.authService.signup(body);
 
-    res.cookie('userId', user.id, {
-      maxAge: 30 * 24 * 60 * 60 * 1000,
-    });
 
     return user
   }
@@ -32,13 +24,8 @@ export class AuthController {
   @Post('/signin')
   async signin(
     @Body() body: SigninDto,
-    @Res({ passthrough: true }) res,
   ): Promise<User> {
     const user = await this.authService.signin(body);
-
-    res.cookie('userId', user.id, {
-      maxAge: 30 * 24 * 60 * 60 * 1000,
-    });
 
     return user
   }

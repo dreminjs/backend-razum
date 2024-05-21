@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post, Put } from '@nestjs/common';
+import { Body, Controller, Get, Logger, Param, Post, Put } from '@nestjs/common';
 import { CurrentUserId } from 'src/auth/decorators/userId.decorator';
 import { CreateOrderDto, UpdateOrderDto } from './dto';
 import { OrderService } from './order.service';
@@ -9,8 +9,11 @@ export class OrderController {
 
     constructor(private readonly orderService:OrderService){}
 
+    private logger = new Logger(OrderController.name)
+
     @Post("")
     async create(@CurrentUserId() id : string,@Body() body : CreateOrderDto){
+        this.logger.log(id)
         return await this.orderService.create(id,body.text)
     }
 
