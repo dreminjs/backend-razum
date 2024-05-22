@@ -8,7 +8,6 @@ import { User } from '@prisma/client';
 export class AuthService {
     constructor(private readonly userService:UserService){}
 
-
     private logger = new Logger(AuthService.name)
 
     async signup(dto:SignupDto): Promise<User> {
@@ -41,5 +40,16 @@ export class AuthService {
         }
 
         return candidate
+    }
+
+    async checkAdminStatus(id:string) {
+
+        const user = await this.userService.findOne({id})
+
+        const isAdmin = user.role === "admin" ? true : false
+
+        {
+            isAdmin
+        }
     }
 }

@@ -24,7 +24,12 @@ export class OrderController {
 
     @Get("")
     async findMany(@CurrentUserId() id : string): Promise<Order[]> {
-      return await this.orderService.findManyByUserId(id)
+      return await this.orderService.findMany({userId:id})
+    }
+    
+    @Get("/admin")
+    async findManyPendingOrders()  {
+        return await this.orderService.findMany({status:"pending"})
     }
 
 }

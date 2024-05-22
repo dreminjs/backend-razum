@@ -16,8 +16,6 @@ export class AuthController {
   ): Promise<User> {
 
     const user = await this.authService.signup(body);
-
-
     return user
   }
 
@@ -26,9 +24,7 @@ export class AuthController {
     @Body() body: SigninDto,
   ): Promise<User> {
     const user = await this.authService.signin(body);
-
     return user
   }
-
 
 }

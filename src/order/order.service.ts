@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { OrderStatus } from '@prisma/client';
+import { OrderStatus, Prisma } from '@prisma/client';
 import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()
@@ -24,8 +24,8 @@ export class OrderService {
         })
     }
 
-    async findManyByUserId(userId:string){
-        return this.prisma.order.findMany({where:{userId}})
+    async findMany(payload:Prisma.OrderWhereInput){
+        return this.prisma.order.findMany({where:payload})
     }
 
 }
