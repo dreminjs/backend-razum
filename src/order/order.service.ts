@@ -25,6 +25,8 @@ export class OrderService {
     }
 
     async findMany(payload:Prisma.OrderWhereInput){
+        if(payload) return
+
         return this.prisma.order.findMany({where:payload})
     }
 

@@ -13,7 +13,7 @@ export class OrderController {
 
     @Post("")
     async create(@CurrentUserId() id : string,@Body() body : CreateOrderDto){
-        this.logger.log(id)
+        this.logger.log(id,"CREATE")
         return await this.orderService.create(id,body.text)
     }
 
@@ -24,11 +24,13 @@ export class OrderController {
 
     @Get("")
     async findMany(@CurrentUserId() id : string): Promise<Order[]> {
+        this.logger.log(id)
       return await this.orderService.findMany({userId:id})
     }
     
     @Get("/admin")
     async findManyPendingOrders()  {
+        this.logger.log("get pending orders")
         return await this.orderService.findMany({status:"pending"})
     }
 
