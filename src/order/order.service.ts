@@ -8,7 +8,7 @@ export class OrderService {
     constructor(private readonly prisma:PrismaService){}
 
     async create(id:string,text:string){
-        await this.prisma.order.create({
+       return await this.prisma.order.create({
             data:{
                 text,
                 userId:id,
@@ -25,8 +25,7 @@ export class OrderService {
     }
 
     async findMany(payload:Prisma.OrderWhereInput){
-        if(payload) return
-
+        
         return this.prisma.order.findMany({where:payload})
     }
 

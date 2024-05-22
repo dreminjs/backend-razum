@@ -13,8 +13,8 @@ export class OrderController {
 
     @Post("")
     async create(@CurrentUserId() id : string,@Body() body : CreateOrderDto){
-        this.logger.log(id,"CREATE")
-        return await this.orderService.create(id,body.text)
+        const order =  await this.orderService.create(id,body.text)
+        return order
     }
 
     @Put(":orderId")
@@ -24,7 +24,7 @@ export class OrderController {
 
     @Get("")
     async findMany(@CurrentUserId() id : string): Promise<Order[]> {
-        this.logger.log(id)
+      if(!id) return 
       return await this.orderService.findMany({userId:id})
     }
     
